@@ -10,7 +10,11 @@ pipeline {
 
         stage('Prepare'){
             steps {
-                bat 'echo APP_PORT=8000\nDB_URL=mongodb://eshop_db:27017\nDB_DATABASE=eshop\nJWT_SECRET_KEY=UjWnZr4u7x!A%D*G-KaPdSgVkYp2s5v8\nJWT_EXPIRATION_TIME=24h\nNODE_ENV=development > .env'
+                script {
+                    def data = 'APP_PORT=8000\nDB_URL=mongodb://eshop_db:27017\nDB_DATABASE=eshop\nJWT_SECRET_KEY=UjWnZr4u7x!A%D*G-KaPdSgVkYp2s5v8\nJWT_EXPIRATION_TIME=24h\nNODE_ENV=development'
+                    writeFile(file: '.env', text: data)
+                }
+                bat 'dir'
             }
         }
 
