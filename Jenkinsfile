@@ -10,8 +10,18 @@ pipeline {
 
         stage('Prepare'){
             steps {
-                bat "docker compose up"
+                withEnv(['APP_PORT=8000', 'DB_URL=mongodb://eshop_db:27017','DB_DATABASE=eshop','JWT_SECRET_KEY=UjWnZr4u7x!A%D*G-KaPdSgVkYp2s5v8','JWT_EXPIRATION_TIME=24h','NODE_ENV=development']) {
+                    bat "docker compose up -d"
+                    bat 'docker compose ps'
+                }
             }
+        }
+    }
+
+    post {
+        always {
+            bat 'docker compose down --remove-orphans -v'
+            bat 'docker compose ps'
         }
     }
 }
