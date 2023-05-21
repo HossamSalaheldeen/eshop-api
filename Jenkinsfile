@@ -19,7 +19,12 @@ pipeline {
     }
 
     post {
-        always {
+        failure {
+            bat 'docker compose down --remove-orphans -v'
+            bat 'docker compose ps'
+        }
+
+        aborted {
             bat 'docker compose down --remove-orphans -v'
             bat 'docker compose ps'
         }
