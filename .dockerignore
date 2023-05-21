@@ -1,0 +1,9 @@
+.idea
+.vscode
+.git
+.gitignore
+README.md
+Dockerfile
+docker*.yml
+node_modules
+dist

@@ -1,0 +1,22 @@
+version: "3"
+services:
+  eshop_db:
+    container_name: mongo_db_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - 2717:27017
+    volumes:
+      - mongo_db:/data/db
+
+  eshop-api-app:
+    container_name: express-nodejs-typescript-container
+    build: .
+    volumes:
+      - ./src:/app/src:ro
+    ports:
+      - "8000:8000"
+    depends_on:
+      - eshop_db
+volumes:
+  mongo_db:

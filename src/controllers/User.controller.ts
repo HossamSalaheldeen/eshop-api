@@ -3,6 +3,7 @@ import userModel from "../models/User.model";
 
 class UserController {
     index = async (req: Request, res: Response) => {
+        console.log("index users");
         let users = await userModel.find({}).exec();
         res.send(users);
     }
